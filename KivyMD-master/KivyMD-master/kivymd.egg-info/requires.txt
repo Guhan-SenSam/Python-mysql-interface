@@ -1,0 +1,12 @@
+kivy
+pillow
+requests
+
+[dev]
+black
+pre-commit
+
+[docs]
+sphinx
+sphinx-autoapi
+sphinx_rtd_theme

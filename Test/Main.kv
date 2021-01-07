@@ -1,0 +1,40 @@
+<root>:
+    Label:
+        size_hint: 1,.1
+        color: 1, 1, 1, 1
+        text:"FileBrowser"
+        pos_hint: {"right": 1, "top": 1}
+    
+    FileChooserIconView:
+        id: filechooser
+        size_hint:1,.9
+        pos_hint:{"top": .9}
+        color: 1,1,1,1 
+       
+    
+    Label:
+        size_hint: .1, .1
+        color: 1,1,1,1
+        pos_hint :{"right":0.9, "top": 0.12}
+        text: "Path to duplicate"
+    
+    TextInput:
+        id:path_input
+        text: ""
+        pos_hint :{"right": 1}
+        size_hint: .3, .05 
+        multiline:False       
+    
+        
+    Button:
+        color: 1,1,1,1
+        text:'Duplicate file'
+        size_hint: .2, .1
+        on_release: root.copy(filechooser.selection, path_input.text)
+        
+    Button:
+        color: 1,1,1,1
+        text:"Undo"
+        size_hint: .2, .1
+        pos_hint: {"right": 0.4}
+        on_release: root.undo()

@@ -1,0 +1,228 @@
+<Loginscreen>:
+    canvas:
+        Color:
+            rgba:0.05,0.05,0.05,1
+        Rectangle:
+            pos:self.pos
+            size:self.size
+            
+        Color:
+            rgba:0.1,0.1,0.1,1
+        RoundedRectangle:<Loginscreen>:
+    canvas:
+        Color:
+            rgba:0.05,0.05,0.05,1
+        Rectangle:
+            pos:self.pos
+            size:self.size
+            
+            size:(root.width-10, root.height-10)
+            pos:(5,5)
+            radius: (30,30,30,30)
+            
+        Color:
+            rgba: 0.15, 0.15, 0.15, 1
+        RoundedRectangle:                
+            pos:(450,150)
+            size:(500,400)
+            radius: (30,30,30,30)
+            
+    MDLabel:
+        pos:670,100     
+        text:"Login"
+        text_size: 50,50
+        size:self.size  
+            
+    MDTextFieldRound:
+        id:userid
+        icon_left: 'account'
+        normal_color: .1,.1,.1,1
+        color_active: app.theme_cls.primary_color
+        pos_hint:{"top": .52, "right": 0.635}
+        size_hint_x:.25
+        
+    MDTextFieldRound:
+        id: passwd
+        icon_left: 'key-variant'
+        normal_color: .1,.1,.1,1
+        color_active: app.theme_cls.primary_color
+        pos_hint:{"top": .40, "right": 0.635}
+        size_hint_x:.25
+        
+    MDRectangleFlatButton:
+        text: 'Explore'
+        font_size: 10
+        on_press:root.loginvar.loginop(userid.text, passwd.text )
+        pos_hint:{"top": .29, "right": 0.54}
+        
+
+       
+        
+<FileCart@ScrollView>:
+    pos:root.pos
+    size:root.size
+    MDList:
+        id:container
+        
+
+<MyBackdropFrontLayer@FileChooserIconView>:
+    backdrop:None
+    pos_hint: {"top": 1}
+    size:self.size
+    
+<MyBackdropBackLayer@FileCart>:
+    pos_hint: {"center_x": .5, "center_y": .38}
+    size: root.size
+    
+
+<Shortcuts@GridLayout>
+    cols:2
+    padding: 20,20,20,20
+    spacing: 40,40
+    
+    MDRoundFlatIconButton:
+        text:"Desktop"
+        icon: "monitor"
+        on_press: root.parent.parent.parent.parent.parent.parent.shortcuts_var.desktop(self)
+        
+    MDRoundFlatIconButton:   
+        text:"Download"
+        icon: "folder-download"
+        on_press: root.parent.parent.parent.parent.parent.parent.shortcuts_var.downloads(self)
+        
+    MDRoundFlatIconButton:   
+        text:"Document"
+        icon: "file-document"
+        on_press: root.parent.parent.parent.parent.parent.parent.shortcuts_var.documents(self)
+        
+    MDRoundFlatIconButton:   
+        text:"images"
+        icon: "folder-download"
+        on_press: root.parent.parent.parent.parent.parent.parent.shortcuts_var.images(self)
+        
+    MDRoundFlatIconButton:   
+        text:"Videos"
+        icon: "movie-open"
+        on_press: root.parent.parent.parent.parent.parent.parent.shortcuts_var.videos(self)
+        
+    MDRoundFlatIconButton:   
+        text:"Recyle Bin"
+        icon: "delete"
+        on_press: root.parent.parent.parent.parent.parent.parent.shortcuts_var.recycle_bin(self)
+
+
+
+<Drive_bay@ScrollView>:
+    MDList:
+        id:drivebay
+
+
+<Drives@Drive_bay>:
+    pos_hint: {"center_x": .5, "center_y": .237}
+    size_x: root.size_x
+    size_y:root.size_y
+
+        
+
+<MainScreen>:
+               
+    FloatLayout:
+        canvas:        
+            Color:
+                rgba: 0.05,0.05,0.05, 1
+            Rectangle:
+                pos: root.pos
+                size: root.size
+                
+            Color:
+                rgba: 0.1, 0.1, 0.1, 1
+            RoundedRectangle:                
+                size:(root.width-10, root.height-10)
+                pos:(5,5)
+                radius: (30,30,30,30)
+                
+            Color:
+                rgba: 0.15, 0.15, 0.15, 1
+            RoundedRectangle:                
+                pos:(10,380)
+                size:(420,root.height-390)
+                radius: (30,30,30,30)
+    
+    BoxLayout:
+        size_hint_y : 0.2
+        size_hint_x : 0.57
+        pos_hint: {'right': 0.97, "top": 0.215}
+        
+        MDTextFieldRound:
+            id:search
+            icon_left: 'folder-search'
+            normal_color: 0.15,0.15,0.15,1
+            color_active: app.theme_cls.primary_color
+            elevation: 20
+    
+    
+    
+    
+    BoxLayout:
+        size_hint_y : 0.92
+        size_hint_x : 0.6
+        pos_hint: {'top': 0.985, "right": 0.99}
+                     
+        MDBackdrop:
+            id:backdrop
+            title: "File Cart"
+            header_text: "Browse files"
+            MDBackdropFrontLayer:
+            
+                MyBackdropFrontLayer:
+                    id:filechooser_icon
+                    backdrop:backdrop
+                    
+            MDBackdropBackLayer:
+                
+                MyBackdropBackLayer:
+                    id: back_layer
+                    
+    BoxLayout:
+        size_hint_y : 0.44
+        size_hint_x : 0.30
+        pos_hint: {'top': 0.98, "right": 0.311}
+        FileChooserListView:
+            id:folder_selector
+            on_selection: root.updatevar.update_filechooser(self,self.selection)
+        
+                    
+    BoxLayout:
+        size_hint_y : 0.48
+        size_hint_x : 0.30
+        pos_hint: {'top': 0.50, "right": 0.31}
+        
+        MDBackdrop:
+            id:secondary_backdrop
+            title: "Drives"
+            header_text: "Shortcuts"
+       
+            MDBackdropFrontLayer:
+                Shortcuts:
+                    id:Shortcuts
+                    backdrop:backdrop
+           
+           
+            MDBackdropBackLayer:     
+                Drives:
+                    id:drivers
+        
+        
+    BoxLayout:
+        MDFloatingActionButtonSpeedDial:
+            data: app.data
+            rotation_root_button: True
+            label_text_color: app.theme_cls.primary_color 
+            color_icon_stack_button: app.theme_cls.primary_color
+            color_icon_root_button: app.theme_cls.primary_color
+            icon: 'pencil'
+            hint_animation:True
+            bg_color_root_button: 0.1,0.1,0.1,1
+            bg_color_stack_button: 0.15,0.15,0.15,1
+            bg_hint_color:  0.1,0.1,0.1,1
+            callback:root.callback

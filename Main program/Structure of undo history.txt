@@ -1,0 +1,15 @@
+1.operation
+2.type of element
+3.from path
+4.to path
+
+
+ BoxLayout:
+        size:300,300
+        size_hint_y : None
+        size_hint_x : None  
+             
+        MDBackdrop:
+            
+
+
